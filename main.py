@@ -31,6 +31,18 @@ class TradingData(BaseModel):
     Volume: float
     Date: str
 
+PORTFOLIO_DATA = [
+    {"commodity": "BTC-USD", "quantity": 2, "purchasePrice": 125.00, "pnl": 18.50, "lockedMargin": 250.00},
+    {"commodity": "ETH-USD", "quantity": 3, "purchasePrice": 78.00, "pnl": -12.30, "lockedMargin": 234.00},
+    {"commodity": "SOL-USD", "quantity": 5, "purchasePrice": 35.00, "pnl": 24.00, "lockedMargin": 175.00},
+    {"commodity": "XRP-USD", "quantity": 7, "purchasePrice": 19.00, "pnl": -7.80, "lockedMargin": 133.00},
+    {"commodity": "DOGE-USD", "quantity": 4, "purchasePrice": 10.00, "pnl": 5.60, "lockedMargin": 40.00},
+]
+
+@app.get("/portfolio")
+async def get_portfolio():
+    return JSONResponse(content=PORTFOLIO_DATA, status_code=200)
+
 @app.get("/commodity/{com_id}")
 async def get_commodity_details(com_id: str, days: int = 7):
     try:
